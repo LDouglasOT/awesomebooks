@@ -55,6 +55,10 @@ main {
   transition: all 0.3s ease;
 }
 
+.add-book {
+  background-color: rgb(110, 165, 0);
+}
+
 .del-btn:hover,
 .add-book:hover {
   background: transparent;
@@ -75,10 +79,6 @@ input {
   padding: 0.5rem 1rem;
   border-radius: 8px;
   border: none;
-}
-
-.add-book {
-  background-color: rgb(110, 165, 0);
 }
 
 .add-book:hover {
