@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+body {
+  background: url("./assets/bg-dots.svg");
+  background-size: cover;
+}
+
 ul {
   list-style: none;
 }
@@ -14,4 +19,79 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+.books-wrapper {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.single-book {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(244, 244, 244);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.single-book:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  transform: scale(1.1);
+}
+
+.del-btn,
+.add-book {
+  background: rgb(238, 89, 89);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.del-btn:hover,
+.add-book:hover {
+  background: transparent;
+  border: 1px solid rgb(238, 89, 89);
+  color: #000;
+}
+
+.books-generator {
+  margin-top: 4rem;
+  background-color: rgb(244, 244, 244);
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+input {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+}
+
+.add-book {
+  background-color: rgb(110, 165, 0);
+}
+
+.add-book:hover {
+  border: 1px solid rgb(110, 165, 0);
+}
+
+@media screen and (max-width: 800px) {
+  .books-wrapper {
+    width: 80%;
+  }
+
+  .books-generator {
+    width: 80%;
+    flex-direction: column;
+  }
 }
