@@ -15,13 +15,14 @@ let dataBooks = [
 ];
 
 const ul = document.createElement("ul");
+
 const booksGenerator = () => {
   dataBooks.map((book) => {
     let li = document.createElement("li");
     li.innerHTML = `
     <h2>${book.title}</h2>
     <h2>${book.auther}</h2>
-    <button class="remove-btn" data-set=${book.id}>Remove</button>
+    <button class="remove-btn">Remove</button>
     `;
     ul.appendChild(li);
   });
@@ -30,13 +31,30 @@ const booksGenerator = () => {
 singleBook.forEach((book, i) => {
   dataBooks.push(book);
 });
-console.log(dataBooks);
 booksGenerator();
-const maindiv = document.querySelector(".books-div").appendChild(ul);
-const removeBtn = document.querySelectorAll(".remove-btn");
-removeBtn.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    const test = dataBooks.filter((item) => item.id == e.target.dataset.set);
-    console.log(test);
-  });
-});
+const maindiv = document.querySelector(".books-wrapper").appendChild(ul);
+
+const add=document.querySelector(".add");
+add.addEventListener("click",()=>{
+ let title= document.querySelector(".title").value
+ let auther= document.querySelector(".author").value
+ let li = document.createElement("li");
+ li.innerHTML = `
+ <h2>${title}</h2>
+ <h2>${auther}</h2>
+ <button class="remove-btn">Remove</button>
+ `;
+ const maindiv = document.querySelector(".books-wrapper ul").appendChild(li);
+ 
+console.log(window.localStorage.getItem("myObject"))
+
+ const close=document.querySelectorAll(".remove-btn")
+for(let i=0;i<close.length;i++){
+
+  close[i].addEventListener("click",()=>{
+    close[i].parentElement.remove();
+  })
+}
+})
+
+
