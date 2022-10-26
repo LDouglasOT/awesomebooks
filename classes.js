@@ -39,13 +39,3 @@ class Book {
   }
   
   // Getting & setting books from & inside local storage
-  class BooksAtLocalStorage {
-    static getBooksFromLs() {
-      let lsBooksArr;
-      if (localStorage.getItem("books-list") === null) {
-        lsBooksArr = [];
-      } else {
-        lsBooksArr = JSON.parse(localStorage.getItem("books-list"));
-      }
-      return lsBooksArr;
-    }
