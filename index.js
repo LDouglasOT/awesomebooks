@@ -55,3 +55,6 @@ const addBooksToArray = (title, auther) => {
   // Add books to local storage
   addDataToLocalStorage(booksData);
 };
+const addDataToLocalStorage = (booksArr) => {
+  window.localStorage.setItem('books', JSON.stringify(booksArr));
+};
