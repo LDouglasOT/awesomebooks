@@ -67,7 +67,7 @@ main {
 }
 
 .books-generator {
-  margin-top: 4rem;
+  margin: 2rem 0;
   background-color: rgb(244, 244, 244);
   border-radius: 8px;
   padding: 1.5rem 2rem;
@@ -83,6 +83,30 @@ input {
 
 .add-book:hover {
   border: 1px solid rgb(110, 165, 0);
+}
+
+.book-added {
+  padding: 0.5rem 1.5rem;
+  background: greenyellow;
+  border-radius: 8px;
+  display: none;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.error-msg {
+  padding: 0.5rem 1.5rem;
+  background: rgb(210, 4, 0);
+  border-radius: 8px;
+  color: #fff;
+  display: none;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.show-message {
+  display: block;
+  opacity: 1;
 }
 
 @media screen and (max-width: 800px) {
