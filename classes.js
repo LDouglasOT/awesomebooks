@@ -96,3 +96,11 @@ addBookBtn.addEventListener("click", () => {
 });
 
 // Remove a book from the list
+const booksWrapper = document.querySelector(".books-wrapper");
+booksWrapper.addEventListener("click", (e) => {
+  BooksInDom.removeBook(e.target);
+  // Remove book from local storage
+  BooksAtLocalStorage.removeBookFromLs(
+    e.target.parentElement.parentElement.dataset.id
+  );
+});
