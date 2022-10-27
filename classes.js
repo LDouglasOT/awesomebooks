@@ -16,23 +16,23 @@ class BooksInDom {
 
   // Add book to the ui
   static addBook(book) {
-    const booksWrapper = document.querySelector('.books-wrapper');
+    const booksWrapper = document.querySelector(".books-wrapper");
 
     booksWrapper.innerHTML += `
     <li class="single-book" data-id=${book.id}>
         <div>
             <h2>${book.title}</h2>
             <h3>${book.auther}</h3>
-            <button class="del-btn">Remove</button>
         </div>
+        <button class="del-btn">Remove</button>
     </li>
     `;
   }
 
   // remove book from the ui
   static removeBook(element) {
-    if (element.classList.contains('del-btn')) {
-      const singleBookWrapper = element.parentElement.parentElement;
+    if (element.classList.contains("del-btn")) {
+      const singleBookWrapper = element.parentElement;
       singleBookWrapper.remove();
     }
   }
@@ -42,10 +42,10 @@ class BooksInDom {
 class BooksAtLocalStorage {
   static getBooksFromLs() {
     let lsBooksArr;
-    if (localStorage.getItem('books-list') === null) {
+    if (localStorage.getItem("books-list") === null) {
       lsBooksArr = [];
     } else {
-      lsBooksArr = JSON.parse(localStorage.getItem('books-list'));
+      lsBooksArr = JSON.parse(localStorage.getItem("books-list"));
     }
     return lsBooksArr;
   }
@@ -53,7 +53,7 @@ class BooksAtLocalStorage {
   static addBooksToLs(book) {
     const booksList = BooksAtLocalStorage.getBooksFromLs();
     booksList.push(book);
-    localStorage.setItem('books-list', JSON.stringify(booksList));
+    localStorage.setItem("books-list", JSON.stringify(booksList));
   }
 
   static removeBookFromLs(bookId) {
@@ -63,44 +63,68 @@ class BooksAtLocalStorage {
         booksList.splice(index, 1);
       }
     });
-    localStorage.setItem('books-list', JSON.stringify(booksList));
+    localStorage.setItem("books-list", JSON.stringify(booksList));
   }
 }
 
 // Invoking books representaion method
-document.addEventListener('DOMContentLoaded', BooksInDom.displayBooks);
+document.addEventListener("DOMContentLoaded", BooksInDom.displayBooks);
 
 // Add books in the Ui
-const titleField = document.querySelector('.title');
-const autherField = document.querySelector('.auther');
-const addBookBtn = document.querySelector('.add-book');
-const successMsg = document.querySelector('.book-added');
-const errorMsg = document.querySelector('.error-msg');
+const titleField = document.querySelector(".title");
+const autherField = document.querySelector(".auther");
+const addBookBtn = document.querySelector(".add-book");
+const successMsg = document.querySelector(".book-added");
+const errorMsg = document.querySelector(".error-msg");
 
-addBookBtn.addEventListener('click', () => {
-  if (titleField.value !== '' && autherField.value !== '') {
+addBookBtn.addEventListener("click", () => {
+  if (titleField.value !== "" && autherField.value !== "") {
     const newBook = new Book(Date.now(), titleField.value, autherField.value);
     BooksInDom.addBook(newBook);
     // reset fields values
-    titleField.value = '';
-    autherField.value = '';
+    titleField.value = "";
+    autherField.value = "";
     // Success & failer messages on adding books
-    successMsg.classList.add('show-message');
-    errorMsg.classList.remove('show-message');
+    successMsg.classList.add("show-message");
+    window.setTimeout(() => {
+      successMsg.classList.remove("show-message");
+    }, 2000);
+    errorMsg.classList.remove("show-message");
     // Add book to local storage
     BooksAtLocalStorage.addBooksToLs(newBook);
   } else {
-    errorMsg.classList.add('show-message');
-    successMsg.classList.remove('show-message');
+    errorMsg.classList.add("show-message");
+    window.setTimeout(() => {
+      errorMsg.classList.remove("show-message");
+    }, 2000);
+    successMsg.classList.remove("show-message");
   }
 });
 
 // Remove a book from the list
-const booksWrapper = document.querySelector('.books-wrapper');
-booksWrapper.addEventListener('click', (e) => {
+const booksWrapper = document.querySelector(".books-wrapper");
+
+booksWrapper.addEventListener("click", (e) => {
   BooksInDom.removeBook(e.target);
   // Remove book from local storage
-  BooksAtLocalStorage.removeBookFromLs(
-    e.target.parentElement.parentElement.dataset.id,
-  );
+  BooksAtLocalStorage.removeBookFromLs(e.target.parentElement.dataset.id);
+});
+
+//Navlist logic
+
+const navPills = document.querySelectorAll(".nav-pill");
+const booksGenerator = document.querySelector(".books-generator");
+const slides = document.querySelectorAll(".display-item");
+
+navPills.forEach((pill) => {
+  pill.addEventListener("click", (e) => {
+    const tar = e.target.classList;
+    slides.forEach((slide) => {
+      if (slide.classList[1] === tar[1]) {
+        slide.classList.remove("hidden");
+      } else {
+        slide.classList.add("hidden");
+      }
+    });
+  });
 });

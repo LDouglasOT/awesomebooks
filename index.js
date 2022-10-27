@@ -1,18 +1,18 @@
-const booksWrapper = document.querySelector('.books-wrapper');
-const titleField = document.querySelector('.title');
-const autherField = document.querySelector('.auther');
-const addBook = document.querySelector('.add-book');
+const booksWrapper = document.querySelector(".books-wrapper");
+const titleField = document.querySelector(".title");
+const autherField = document.querySelector(".auther");
+const addBook = document.querySelector(".add-book");
 
 let booksData = [
   {
     id: 1,
-    title: 'Feel free to remove me!',
-    auther: 'Mo Khaled',
+    title: "Feel free to remove me!",
+    auther: "Mo Khaled",
   },
 ];
 
-if (localStorage.getItem('books')) {
-  booksData = JSON.parse(localStorage.getItem('books'));
+if (localStorage.getItem("books")) {
+  booksData = JSON.parse(localStorage.getItem("books"));
 }
 
 booksData.forEach((book) => {
@@ -25,19 +25,19 @@ booksData.forEach((book) => {
     `;
 });
 
-addBook.addEventListener('click', () => {
-  if (titleField !== '' && autherField !== '') {
+addBook.addEventListener("click", () => {
+  if (titleField !== "" && autherField !== "") {
     addBooksToArray(titleField.value, autherField.value);
-    titleField.value = '';
-    autherField.value = '';
+    titleField.value = "";
+    autherField.value = "";
   }
 });
 
 // Delete logic
-booksWrapper.addEventListener('click', (e) => {
-  if (e.target.classList.contains('del-btn')) {
+booksWrapper.addEventListener("click", (e) => {
+  if (e.target.classList.contains("del-btn")) {
     // Remove from local storage
-    deleteBookFromLs(e.target.parentElement.getAttribute('data-id'));
+    deleteBookFromLs(e.target.parentElement.getAttribute("data-id"));
     // Remove the item from dom
     e.target.parentElement.remove();
   }
@@ -57,7 +57,7 @@ const addBooksToArray = (title, auther) => {
 };
 
 const addBooksToDom = (booksArr) => {
-  booksWrapper.innerHTML = '';
+  booksWrapper.innerHTML = "";
   booksArr.forEach((book) => {
     booksWrapper.innerHTML += `
            <li class="single-book" data-id=${book.id}>
@@ -72,11 +72,11 @@ const addBooksToDom = (booksArr) => {
 };
 
 const addDataToLocalStorage = (booksArr) => {
-  window.localStorage.setItem('books', JSON.stringify(booksArr));
+  window.localStorage.setItem("books", JSON.stringify(booksArr));
 };
 
 const getItemsFromLocalStorage = () => {
-  const books = window.localStorage.getItem('books');
+  const books = window.localStorage.getItem("books");
   if (books) {
     const data = JSON.parse(books);
     addBooksToDom(data);
