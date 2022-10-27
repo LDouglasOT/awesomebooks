@@ -9,13 +9,59 @@ body {
   background-size: cover;
 }
 
+header {
+  width: 95%;
+  min-height: 8vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  border: 2px solid #000;
+  padding: 0.5rem 2rem;
+  margin-top: 1rem;
+}
+
+header nav .nav-list {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.hidden {
+  opacity: 0;
+  z-index: -100;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.alert-empty-list {
+  opacity: 0;
+  border-bottom: 1px solid rgb(206, 0, 0);
+}
+
+.nav-list li {
+  border-right: 1px solid #000;
+  padding-right: 1rem;
+}
+
+.nav-list li:last-child {
+  border: none;
+  padding: 0;
+}
+
+.nav-list li.active {
+  background: rgba(169, 0, 0, 0.3);
+}
+
 ul {
   list-style: none;
 }
 
 main {
   width: 100%;
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,7 +75,12 @@ main {
   gap: 1.5rem;
 }
 
+.books-wrapper h2 {
+  text-align: center;
+}
+
 .single-book {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -107,6 +158,13 @@ input {
 .show-message {
   display: block;
   opacity: 1;
+}
+
+footer {
+  width: 95%;
+  border: 2px solid #000;
+  margin: auto;
+  padding: 0.5rem 2rem;
 }
 
 @media screen and (max-width: 800px) {
