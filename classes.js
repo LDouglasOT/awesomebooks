@@ -110,7 +110,13 @@ booksWrapper.addEventListener("click", (e) => {
   BooksAtLocalStorage.removeBookFromLs(e.target.parentElement.dataset.id);
 });
 
-//Navlist logic
+const activeLink = (e) => {
+  let navElements = document.querySelectorAll(".active");
+  navElements.forEach((element) => {
+    element.classList.remove("active");
+  });
+  e.target.className += " active";
+};
 
 const navPills = document.querySelectorAll(".nav-pill");
 const booksGenerator = document.querySelector(".books-generator");
