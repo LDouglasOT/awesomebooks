@@ -1,91 +1,81 @@
-const booksWrapper = document.querySelector('.books-wrapper');
+import {removeBook,addBook,getBooksFromLs,displayBooks} from "./modules/modules.js"
+import Book from "./modules/Books.js"
+import {addBooksToLs} from "./modules/Books.js"
+import {removeBookFromLs,insertElements} from "./modules/removebooks.js"
+import { DateTime } from "./modules/luxon.js";
+insertElements()
+
+let stringInput = "2021-06-10T02:20:50+00:00";
+let timeZone = "America/Los_Angeles";
+const dateObject = new DateTime(stringInput).toLocaleString("en-US", {
+  timeZone,
+});
+document.querySelector(".dates").innerHTML=dateObject
+// Invoking books representaion method
+document.addEventListener('DOMContentLoaded', displayBooks);
+
+// Add books in the Ui
 const titleField = document.querySelector('.title');
 const autherField = document.querySelector('.auther');
-const addBook = document.querySelector('.add-book');
+const addBookBtn = document.querySelector('.add-book');
+const successMsg = document.querySelector('.book-added');
+const errorMsg = document.querySelector('.error-msg');
 
-let booksData = [
-  {
-    id: 1,
-    title: 'Feel free to remove me!',
-    auther: 'Mo Khaled',
-  },
-];
-
-if (localStorage.getItem('books')) {
-  booksData = JSON.parse(localStorage.getItem('books'));
-}
-
-booksData.forEach((book) => {
-  booksWrapper.innerHTML += `
-           <li class="single-book" data-id=${book.id}>
-              <h2>${book.title}</h2>
-              <h3>${book.auther}</h3>
-              <button class="del-btn">Remove</button>
-           </li>
-    `;
-});
-
-addBook.addEventListener('click', () => {
-  if (titleField !== '' && autherField !== '') {
-    addBooksToArray(titleField.value, autherField.value);
+addBookBtn.addEventListener('click', () => {
+  if (titleField.value !== '' && autherField.value !== '') {
+    const newBook = new Book(Date.now(), titleField.value, autherField.value);
+    addBook(newBook);
+    // reset fields values
     titleField.value = '';
     autherField.value = '';
+    // Success & failer messages on adding books
+    successMsg.classList.add('show-message');
+    window.setTimeout(() => {
+      successMsg.classList.remove('show-message');
+    }, 2000);
+    errorMsg.classList.remove('show-message');
+    // Add book to local storage
+    addBooksToLs(newBook);
+  } else {
+    errorMsg.classList.add('show-message');
+    window.setTimeout(() => {
+      errorMsg.classList.remove('show-message');
+    }, 2000);
+    successMsg.classList.remove('show-message');
   }
 });
 
-// Delete logic
+// Remove a book from the list
+const booksWrapper = document.querySelector('.books-wrapper');
+
 booksWrapper.addEventListener('click', (e) => {
-  if (e.target.classList.contains('del-btn')) {
-    // Remove from local storage
-    deleteBookFromLs(e.target.parentElement.getAttribute('data-id'));
-    // Remove the item from dom
-    e.target.parentElement.remove();
-  }
+  removeBook(e.target);
+  // Remove book from local storage
+  removeBookFromLs(e.target.parentElement.dataset.id);
 });
 
-const addBooksToArray = (title, auther) => {
-  const book = {
-    id: Date.now(),
-    title,
-    auther,
-  };
-  booksData.push(book);
-  // Add books to Dom
-  addBooksToDom(booksData);
-  // Add books to local storage
-  addDataToLocalStorage(booksData);
-};
+const navList = document.querySelector('.nav-list');
 
-const addBooksToDom = (booksArr) => {
-  booksWrapper.innerHTML = '';
-  booksArr.forEach((book) => {
-    booksWrapper.innerHTML += `
-           <li class="single-book" data-id=${book.id}>
-              <div>
-                 <h2>${book.title}</h2>
-                 <h3>${book.auther}</h3>
-              </div>
-              <button class="del-btn">Remove</button>
-           </li>
-    `;
+navList.addEventListener('click', (e) => {
+  const navElements = document.querySelectorAll('.active');
+  navElements.forEach((element) => {
+    element.classList.remove('active');
   });
-};
+  e.target.className += ' active';
+});
 
-const addDataToLocalStorage = (booksArr) => {
-  window.localStorage.setItem('books', JSON.stringify(booksArr));
-};
+const navPills = document.querySelectorAll('.nav-pill');
+const slides = document.querySelectorAll('.display-item');
 
-const getItemsFromLocalStorage = () => {
-  const books = window.localStorage.getItem('books');
-  if (books) {
-    const data = JSON.parse(books);
-    addBooksToDom(data);
-  }
-};
-
-const deleteBookFromLs = (bookId) => {
-  booksData = booksData.filter((book) => Number(book.id) !== Number(bookId));
-  addDataToLocalStorage(booksData);
-};
-
-getItemsFromLocalStorage();
+navPills.forEach((pill) => {
+  pill.addEventListener('click', (e) => {
+    const tar = e.target.classList;
+    slides.forEach((slide) => {
+      if (slide.classList[1] === tar[1]) {
+        slide.classList.remove('hidden');
+      } else {
+        slide.classList.add('hidden');
+      }
+    });
+  });
+});
