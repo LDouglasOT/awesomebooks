@@ -20,9 +20,16 @@ export const insertElements=()=>{
         <li class="nav-pill add-new">Add new</li>
         <li class="nav-pill contact">Contact</li>
       </ul>
+      <br/>
     </nav>
     </header>
+       
     <main>
+    <div class="gundi">
+    <div></div>
+    <div></div>
+    <div class="times"></div>
+    </div>
     <ul class="display-item list books-wrapper">
       <h2>All awesome books</h2>
       <h3 class="alert-empty-list">

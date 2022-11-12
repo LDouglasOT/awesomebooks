@@ -171,6 +171,13 @@ footer {
   align-items: center;
 }
 
+.gundi {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
 @media screen and (max-width: 800px) {
   .books-wrapper {
     width: 80%;

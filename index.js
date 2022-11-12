@@ -10,7 +10,7 @@ let timeZone = "America/Los_Angeles";
 const dateObject = new DateTime(stringInput).toLocaleString("en-US", {
   timeZone,
 });
-document.querySelector(".dates").innerHTML=dateObject
+document.querySelector(".times").innerHTML=dateObject
 // Invoking books representaion method
 document.addEventListener('DOMContentLoaded', displayBooks);
 
