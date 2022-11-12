@@ -44,8 +44,12 @@ header nav .nav-list {
 .nav-list li {
   border-right: 1px solid #000;
   padding-right: 1rem;
+<<<<<<< HEAD
   cursor:pointer;
   padding:8px;
+=======
+  cursor: pointer;
+>>>>>>> ed8962b38da5ef1dc6c60cc0bf173f859c50aa6e
 }
 
 .nav-list li:last-child {
@@ -168,7 +172,11 @@ footer {
   margin: auto;
   padding: 0.5rem 2rem;
   display: flex;
+<<<<<<< HEAD
   justify-content:space-evenly;
+=======
+  justify-content: space-evenly;
+>>>>>>> ed8962b38da5ef1dc6c60cc0bf173f859c50aa6e
   align-items: center;
 }
 
