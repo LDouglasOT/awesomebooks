@@ -43,7 +43,8 @@ header nav .nav-list {
 
 .nav-list li {
   border-right: 1px solid #000;
-  padding-right: 1rem;
+  cursor: pointer;
+  padding: 8px;
 }
 
 .nav-list li:last-child {
@@ -165,6 +166,16 @@ footer {
   border: 2px solid #000;
   margin: auto;
   padding: 0.5rem 2rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.gundi {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
 }
 
 @media screen and (max-width: 800px) {
